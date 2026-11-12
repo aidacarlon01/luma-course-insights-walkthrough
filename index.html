@@ -1,0 +1,333 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>LUMA Course Insights Walk-through</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,700&family=Figtree:wght@400;500;600;700;800&display=swap">
+<style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#fff;color:#000}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style>
+<style>
+/* Layout: amber tour band above a made-up Canvas course (left course nav + LUMA panel).
+   Single light theme on purpose: it mirrors the light Canvas screens staff will use. Same look as the LUMA admin walk-through. */
+:root{
+  --ink:#161b33; --muted:#62687f; --faint:#9298ad; --line:#e3e5ee; --surface:#fff; --canvas:#f3f4f8;
+  --navred:#b4232c; --kcl:#2d2d2d;
+  --blue:#2a39ad; --blue-soft:#eceefb; --blue-line:#c9cdf2; --navy:#0d1665;
+  --green:#1b7a46; --green-soft:#e5f3ea;
+  --amber:#e09b14; --amber-soft:#fff5dc; --amber-line:#efd38f; --amber-ink:#4a3300;
+  --chart-1:#2f5be0; --chart-2:#16996a;
+  --f-ui:'Figtree',system-ui,-apple-system,'Segoe UI',sans-serif;
+  --f-display:'Bricolage Grotesque','Figtree',system-ui,sans-serif;
+  color-scheme:light;
+}
+*{box-sizing:border-box}
+html,body{background:var(--canvas)}
+body{color:var(--ink);font-family:var(--f-ui);font-size:14px;line-height:1.45}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:60;background:var(--canvas)}
+button{font:inherit;color:inherit}
+:focus-visible{outline:3px solid var(--blue);outline-offset:2px}
+.page{max-width:1400px;margin:0 auto;padding-block:20px 40px;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));display:grid;gap:14px}
+.intro{display:flex;flex-wrap:wrap;gap:8px 20px;align-items:flex-end;justify-content:space-between}
+.intro h1{font-family:var(--f-display);font-size:30px;line-height:1.1;margin:0;letter-spacing:-.01em;text-wrap:balance}
+.intro p{margin:6px 0 0;color:var(--muted);max-width:66ch}
+.badge{display:inline-flex;align-items:center;gap:6px;background:var(--amber-soft);border:1px solid var(--amber-line);color:var(--amber-ink);border-radius:999px;padding:4px 12px;font-size:12px;font-weight:700;white-space:nowrap}
+
+.coach{background:var(--amber-soft);border:1px solid var(--amber-line);border-radius:14px;padding:12px 16px 14px;z-index:40}
+@media (min-width:900px) and (min-height:820px){.coach{position:sticky;top:env(safe-area-inset-top,0px)}}
+.tour{display:grid;gap:8px}
+.tmeta{display:flex;flex-wrap:wrap;align-items:center;gap:8px 14px}
+.count{font-size:11px;font-weight:800;letter-spacing:.06em;text-transform:uppercase;color:var(--amber)}
+.tdots{display:flex;gap:5px;flex-wrap:wrap}
+.tdot{width:8px;height:8px;border-radius:50%;border:0;padding:0;background:var(--amber-line);cursor:pointer}
+.tdot.past{background:var(--amber)}
+.tdot.on{background:var(--ink);width:20px;border-radius:999px}
+.tskip{margin-left:auto;border:0;background:none;color:var(--amber-ink);font-size:13px;font-weight:600;cursor:pointer;text-decoration:underline}
+.tour h3{margin:0;font-family:var(--f-display);font-size:20px;line-height:1.2}
+.tour p{margin:0;max-width:74ch;font-size:15px}
+.tour ul{margin:0;padding-left:20px;max-width:74ch;font-size:14.5px;display:grid;gap:3px}
+.cbtns{display:flex;gap:8px;flex-wrap:wrap}
+.cbtn{border:1px solid var(--amber-line);background:#fffdf6;border-radius:8px;padding:6px 14px;font-size:13px;font-weight:600;cursor:pointer;color:var(--amber-ink)}
+.cbtn.primary{background:var(--ink);color:#fff;border-color:var(--ink)}
+.spot{outline:3px solid var(--amber)!important;outline-offset:3px;border-radius:8px;box-shadow:0 0 0 8px rgba(224,155,20,.18)}
+
+/* Canvas frame */
+.app{display:grid;grid-template-columns:54px 190px minmax(0,1fr);height:760px;border:1px solid var(--line);border-radius:14px;overflow:hidden;background:var(--surface);position:relative;box-shadow:0 1px 2px rgba(20,25,60,.05),0 10px 30px rgba(20,25,60,.07)}
+.gnav{background:var(--kcl);display:flex;flex-direction:column;align-items:center;gap:14px;padding:12px 0}
+.gnav .lg{width:34px;height:34px;border-radius:6px;background:var(--navred);color:#fff;font-size:8px;font-weight:800;display:grid;place-items:center;text-align:center;line-height:1}
+.gnav i{width:22px;height:22px;border-radius:5px;background:rgba(255,255,255,.18)}
+.cnav{border-right:1px solid var(--line);padding:16px 10px;display:grid;gap:2px;align-content:start;overflow:auto;min-height:0}
+.cnav .crs{font-size:10px;color:var(--muted);font-style:italic;padding:0 8px 8px}
+.cnav button{text-align:left;border:0;background:none;color:var(--navred);padding:6px 8px;border-radius:6px;font-size:13px;cursor:pointer;display:flex;justify-content:space-between;align-items:center;gap:6px}
+.cnav button:hover{background:#f7f7f7}
+.cnav button.on{color:var(--ink);font-weight:700;border-left:3px solid var(--ink);border-radius:0;padding-left:6px}
+.cnav button .hid{width:12px;height:12px;border:1.5px solid #bbb;border-radius:50%;flex:none}
+.main{display:grid;grid-template-rows:auto minmax(0,1fr);min-width:0;min-height:0;background:#fff}
+.crumb{padding:12px 20px;border-bottom:1px solid var(--line);font-size:13px;color:var(--navred);display:flex;gap:8px;align-items:center}
+.crumb span{color:var(--muted)}
+.stage{min-height:0;overflow:auto;padding:18px 20px 24px;display:grid;align-content:start}
+.hint{color:var(--muted);font-size:13.5px;max-width:60ch;margin:0}
+
+/* LUMA panel */
+.luma{border:1px solid var(--line);border-radius:12px;max-width:640px;width:100%;margin:0 auto;display:grid;grid-template-rows:auto minmax(0,1fr);min-height:600px;background:#fff;box-shadow:0 1px 3px rgba(20,25,60,.08)}
+.lhead{display:flex;align-items:center;gap:8px;padding:8px 12px;border-bottom:1px solid var(--line)}
+.lhead .t{flex:1;text-align:center;font-weight:600}
+.ib{border:1px solid transparent;background:none;border-radius:7px;padding:5px;display:grid;place-items:center;cursor:pointer;color:var(--ink)}
+.ib:hover{background:#f3f4f8}
+.ib.on{border-color:var(--ink);background:#f3f4f8}
+.lbody{min-height:0;overflow:auto;padding:16px 18px 20px;display:grid;gap:12px;align-content:start}
+.chat{display:grid;grid-template-rows:1fr auto;min-height:0}
+.chat .welcome{font-size:13px;color:var(--ink);max-width:56ch}
+.ask{border:1px solid #cfd3e2;border-radius:10px;padding:10px 12px;color:var(--faint);font-size:13px;display:flex;justify-content:space-between;align-items:center}
+.ask b{width:26px;height:26px;border-radius:50%;background:var(--ink);display:inline-block}
+.dash h2{margin:0;font-size:18px;font-weight:700;display:flex;gap:10px;align-items:center;flex-wrap:wrap}
+.cid{font-size:10.5px;border:1px solid var(--line);border-radius:999px;padding:1px 8px;color:var(--muted);font-weight:500}
+.tabs{display:flex;gap:16px;border-bottom:1px solid var(--line);margin-top:4px}
+.tabs button{border:0;background:none;padding:8px 2px;font-size:13.5px;color:var(--muted);cursor:pointer;border-bottom:2px solid transparent;margin-bottom:-1px}
+.tabs button.on{color:var(--ink);font-weight:700;border-bottom-color:var(--ink)}
+.sec h3{margin:4px 0 2px;font-size:17px}
+.sec .sub{color:var(--muted);font-size:12.5px;margin:0;max-width:58ch}
+.ctrls{display:flex;flex-wrap:wrap;gap:8px;align-items:center;border-radius:8px}
+.sel{border:1px solid #cfd3e2;border-radius:8px;padding:7px 10px;font-size:12.5px;display:inline-flex;gap:8px;align-items:center;background:#fff;color:var(--muted);cursor:pointer}
+.seg{display:inline-flex;border:1px solid #cfd3e2;border-radius:8px;overflow:hidden}
+.seg button{border:0;background:#fff;padding:7px 12px;font-size:12.5px;cursor:pointer}
+.seg button.on{background:#eef0f7;font-weight:700}
+.mgrid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;border-radius:8px}
+.metric{border:1px solid var(--line);border-radius:12px;padding:12px 14px;display:grid;gap:4px}
+.metric h4{margin:0;font-size:13px;font-weight:600;display:flex;gap:8px;align-items:center}
+.metric h4 i{width:24px;height:24px;border-radius:7px;border:1px solid var(--line);display:grid;place-items:center;font-style:normal;font-size:12px}
+.metric .big{font-size:26px;font-weight:600;font-variant-numeric:tabular-nums}
+.metric .vb{font-size:12px;font-weight:600;text-decoration:underline;justify-self:end;cursor:pointer;border:0;background:none;padding:0}
+.minis{display:flex;flex-wrap:wrap;gap:8px 28px;border-radius:8px;padding:2px 4px}
+.mini{display:grid;gap:2px}
+.mini span{font-size:11.5px;color:var(--muted)}
+.mini b{font-size:20px;font-weight:600;font-variant-numeric:tabular-nums}
+.chartbox{border:1px solid var(--line);border-radius:12px;padding:12px 14px;display:grid;gap:8px}
+.chartwrap{display:grid;grid-template-columns:minmax(0,1fr) 150px;gap:10px}
+.chartwrap svg{width:100%;height:auto;display:block}
+.legend{display:grid;gap:5px;font-size:11.5px;align-content:start}
+.legend button{display:flex;gap:6px;align-items:center;border:0;background:none;padding:0;cursor:pointer;text-align:left;color:var(--ink)}
+.legend i{width:18px;height:9px;border-radius:2px;flex:none}
+.legend .off{color:var(--faint);text-decoration:line-through}
+.tsvg text{font-family:var(--f-ui);font-size:10px;fill:var(--muted)}
+.tbl{width:100%;border-collapse:collapse;font-size:12px;font-variant-numeric:tabular-nums}
+.tbl th,.tbl td{padding:5px 8px;border-bottom:1px solid var(--line);text-align:right}
+.tbl th:first-child,.tbl td:first-child{text-align:left}
+.tbl th{font-size:10.5px;text-transform:uppercase;letter-spacing:.05em;color:var(--muted)}
+.linkbtn{border:0;background:none;color:var(--navy);font-weight:600;cursor:pointer;padding:0;font-size:12.5px;justify-self:start}
+
+/* Trends */
+.trhead{display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap}
+.b{border:1px solid #cfd3e2;background:#fff;border-radius:9px;padding:7px 14px;font-weight:600;cursor:pointer;font-size:13px}
+.b.dark{background:var(--ink);border-color:var(--ink);color:#fff}
+.b:disabled{opacity:.45;cursor:not-allowed}
+.show{background:var(--blue-soft);color:var(--navy);text-align:center;border-radius:6px;padding:6px;font-size:12.5px;font-weight:600}
+.reports{border:1px solid var(--line);border-radius:10px;padding:10px 12px;display:grid;gap:8px}
+.reports h4{margin:0;font-size:14px}
+.dlab{font-size:10.5px;text-transform:uppercase;letter-spacing:.05em;color:var(--muted);border-bottom:1px solid var(--line);padding-bottom:3px}
+.norep{color:var(--muted);text-align:center;font-size:13px;padding:8px}
+.rep{border:1px solid var(--line);border-radius:8px;padding:8px 10px;display:grid;gap:2px;background:#fff;cursor:pointer;text-align:left;width:100%}
+.rep.on{background:var(--blue-soft);border-color:var(--blue-line)}
+.rep b{font-size:13px}
+.rep span{font-size:11.5px;color:var(--muted)}
+.ready{font-size:10px;font-weight:800;color:var(--green);border:1px solid #9fd4b4;border-radius:999px;padding:0 7px;letter-spacing:.05em;justify-self:start}
+.themes{display:grid;gap:8px;border-radius:8px}
+.theme{border:1px solid var(--line);border-radius:10px;padding:10px 12px;display:grid;grid-template-columns:auto minmax(0,1fr);gap:3px 12px}
+.theme .n{font-size:11px;border:1px solid var(--line);border-radius:6px;padding:1px 6px;grid-row:1/3;align-self:start;white-space:nowrap;font-variant-numeric:tabular-nums}
+.theme b{font-size:13.5px}
+.theme p{margin:0;font-size:12.5px;color:var(--muted)}
+.overlay{position:absolute;inset:0;background:rgba(14,18,40,.38);display:grid;place-items:center;z-index:30;padding:16px}
+.modal{background:#fff;border-radius:12px;width:min(440px,100%);box-shadow:0 20px 60px rgba(10,14,40,.3);display:grid}
+.mhead{display:flex;justify-content:space-between;align-items:center;padding:14px 18px 4px}
+.mhead h3{margin:0;font-size:15px}
+.mbody{padding:8px 18px 14px;display:grid;gap:10px}
+.field{display:grid;gap:4px;font-size:12.5px;font-weight:600}
+.field input{font:inherit;font-size:13px;font-weight:400;border:1px solid #cfd3e2;border-radius:8px;padding:7px 10px;width:100%;color:var(--ink);background:#fff}
+.req{color:#b8382a}
+.nconv{font-size:13px;font-weight:700}
+.warn{font-size:12px;color:#b8382a;margin:0}
+.ok{font-size:12px;color:var(--green);margin:0}
+.mfoot{display:flex;justify-content:flex-end;gap:8px;padding:10px 18px 14px}
+.note{border-left:3px solid var(--amber);background:var(--amber-soft);padding:8px 12px;border-radius:0 8px 8px 0;font-size:13px}
+.toast{position:fixed;left:50%;bottom:calc(18px + env(safe-area-inset-bottom,0px));transform:translateX(-50%);background:var(--ink);color:#fff;padding:10px 16px;border-radius:10px;font-size:13px;z-index:80;max-width:min(520px,calc(100vw - 32px))}
+.foot{color:var(--muted);font-size:12.5px;margin:0}
+@media (prefers-reduced-motion:no-preference){.spot{transition:outline-color .2s}}
+@media (max-width:860px){
+  .app{grid-template-columns:1fr;height:auto}
+  .gnav{display:none}
+  .cnav{display:flex;flex-wrap:wrap;gap:4px;border-right:0;border-bottom:1px solid var(--line);padding:10px}
+  .cnav .crs{width:100%}
+  .stage{max-height:720px}
+  .chartwrap{grid-template-columns:1fr}
+  .legend{display:flex;flex-wrap:wrap;gap:6px 12px}
+}
+@media (max-width:560px){.mgrid{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+
+<div class="page">
+  <header class="intro">
+    <div>
+      <h1>LUMA course insights walk-through</h1>
+      <p>A five-minute tour of the LUMA data you can see inside any Canvas course: Insights and Trends. Click <b>Next</b> to be guided, or click around. Everything here is made up, and nothing you do changes LUMA.</p>
+    </div>
+    <span class="badge">Practice copy · made-up data</span>
+  </header>
+  <section class="coach" id="coach" aria-live="polite"></section>
+  <div class="app" id="app"></div>
+  <p class="foot">This practice copy follows the LUMA course dashboard as of November 2026. Small details may look different in your course.</p>
+</div>
+<div class="toast" id="toast" hidden></div>
+
+<script>
+(function(){
+"use strict";
+const esc = s => String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const P={
+  hist:'<path d="M3 12a9 9 0 1 0 3-6.7"/><path d="M3 4v5h5"/><path d="M12 7v5l3 2"/>',
+  chart:'<path d="M4 20V10M10 20V4M16 20v-7M22 20H2"/>',
+  edit:'<path d="M12 20h9"/><path d="M16.5 3.5a2.1 2.1 0 0 1 3 3L7 19l-4 1 1-4Z"/>',
+  dots:'<circle cx="5" cy="12" r="1.5"/><circle cx="12" cy="12" r="1.5"/><circle cx="19" cy="12" r="1.5"/>',
+  user:'<circle cx="12" cy="8" r="4"/><path d="M4 21a8 8 0 0 1 16 0"/>',
+  cal:'<rect x="3" y="5" width="18" height="16" rx="2"/><path d="M16 3v4M8 3v4M3 11h18"/>',
+  chev:'<path d="m6 9 6 6 6-6"/>',
+  x:'<path d="M18 6 6 18M6 6l12 12"/>',
+  plus:'<path d="M12 5v14M5 12h14"/>',
+  table:'<rect x="3" y="4" width="18" height="16" rx="2"/><path d="M3 10h18M9 4v16"/>'
+};
+const ic=(n,s=16)=>`<svg viewBox="0 0 24 24" width="${s}" height="${s}" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">${P[n]}</svg>`;
+
+/* made-up data */
+const COURSE='KCL_PM_101: PM Essentials', CODE='KCL_PM_101_P326';
+const DAYS=['13 Oct','15 Oct','17 Oct','19 Oct','21 Oct','23 Oct','25 Oct','27 Oct','29 Oct','31 Oct','2 Nov','4 Nov','6 Nov','8 Nov','10 Nov','12 Nov'];
+const CONV=[5,3,1,7,2,0,0,2,0,2,1,1,2,0,0,0];
+const ESC =[0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0];
+const TOT=CONV.reduce((a,b)=>a+b,0);
+const REPORT={name:'PM101 – first four weeks',range:'13 Oct 2026 - 12 Nov 2026',gen:'12 Nov 26 10:04',themes:[
+  {n:14,t:'Assignment 1 brief and deadline',d:'Students ask what Assignment 1 must include, how long it should be and when it is due. Most answers come from the assignment page and the schedule.'},
+  {n:9,t:'Finding module pages and readings',d:'"Where is…" questions about Module 2 and 3 pages, the glossary and the recommended readings.'},
+  {n:5,t:'Live session times and recordings',d:'When the weekly live session runs in UK time, how to join, and where the recording appears afterwards.'},
+  {n:3,t:'Product discovery concepts',d:'Students paste a draft problem statement or ask LUMA to explain discovery terms from Module 1.'}]};
+
+let S={nav:'home',view:'chat',tab:'insights',daily:true,series:{conv:true,esc:true},table:false,modal:false,name:'',hasReport:false,repSel:false,step:0,skipped:false};
+const app=document.getElementById('app'), coach=document.getElementById('coach');
+
+/* tour */
+const STEPS=[
+ {t:'Welcome',h:'Live LUMA data, inside the course',p:'From now on you don\'t need a separate LearnWise login to see how students use LUMA. Teachers and admins can open it from any course. This tour shows you where it is and what each number means.',spot:null,on:()=>{S.nav='home';S.view='chat'}},
+ {t:'Open LUMA',h:'1. Click LUMA in the course navigation',p:'Open the course as you normally would, then click <b>LUMA</b> in the left-hand course menu. The LUMA chat opens in the middle of the page.',spot:'[data-nav=luma]',on:()=>{S.nav='home';S.view='chat'}},
+ {t:'Stats icon',h:'2. Click the stats icon',p:'At the top left of LUMA there are two small icons. The clock is your chat history. The <b>bar chart</b> next to it opens the course dashboard. Click it.',spot:'#statsbtn',on:()=>{S.nav='luma';S.view='chat'}},
+ {t:'Insights',h:'3. Insights: how much LUMA is used in this course',p:'The dashboard opens on <b>Insights</b>, for this course only. The headline numbers are:',ul:['<b>Number of conversations</b>: chat threads in the date range. One thread can have many messages.','<b>Unique users</b>: different people who chatted at least once.','<b>Shortcut button clicks</b>: conversations started from a preset button. Usually 0 unless shortcuts are switched on.','<b>AI answers</b>, <b>answers per conversation</b> and <b>conversations per user</b>: how busy and how deep the chats are.'],spot:'#metrics',on:()=>{S.nav='luma';S.view='dash';S.tab='insights'}},
+ {t:'Filters',h:'4. Change the role and the dates',p:'<b>All roles</b> lets you look at students only, or staff only. The date picker sets the window, and <b>Daily / Monthly</b> changes how the chart is grouped. The default is the last 30 days.',spot:'#ctrls',on:()=>{S.nav='luma';S.view='dash';S.tab='insights'}},
+ {t:'Chart',h:'5. Read the chart',p:'Two lines are on by default: <b>Conversations</b> (blue) and <b>Escalation</b> (green, when a chat was passed to a help desk). Click a legend item to switch other lines on, or <b>View data as table</b> to see the numbers. Try it.',spot:'#chartbox',on:()=>{S.nav='luma';S.view='dash';S.tab='insights'}},
+ {t:'Trends',h:'6. Trends: what students are asking about',p:'The <b>Trends</b> tab groups conversations into topics so you can see the big themes without reading anything. There are no reports until someone creates one. Click <b>New report</b>.',spot:'#newrep',on:()=>{S.nav='luma';S.view='dash';S.tab='trends';S.modal=false}},
+ {t:'New report',h:'7. Name it, pick the dates, submit',p:'Give the report a name and choose a start and end date. LUMA needs <b>at least 30 conversations</b> in that window to find themes, so widen the dates if it says the number is too low. Then press <b>Submit</b>.',spot:'#modal',on:()=>{S.nav='luma';S.view='dash';S.tab='trends';S.modal=true;S.name='PM101 – first four weeks'}},
+ {t:'Themes',h:'8. Reading a trend report',p:'Each theme has a title, a short summary and the number of conversations in it. This is the fastest way to spot a confusing page or a deadline nobody can find. Reports stay in the list for everyone with access to the course.',spot:'#themes',on:()=>{S.nav='luma';S.view='dash';S.tab='trends';S.modal=false;S.hasReport=true;S.repSel=true}},
+ {t:'Monthly reports',h:'9. This is live data. The monthly report is still the full story.',p:'What you see here updates as students chat. It tells you <i>how much</i> and <i>about what</i>. The monthly LUMA engagement report you already receive (around the 1st of each month) does the deeper reading: return rates, what students paste in, content gaps and recommendations. Use the dashboard to check things today, and the report to decide priorities.',spot:null,on:()=>{S.nav='luma';S.view='dash';S.tab='insights'}},
+ {t:'Done',h:'That\'s the tour',p:'Three things to remember: the dashboard is per course; it shows numbers and themes, not individual students or their messages; and nothing you do here changes what students see. Questions go to Aida or Buhle in Learning Technology.',spot:null,on:()=>{}}
+];
+function go(i){S.step=Math.max(0,Math.min(STEPS.length-1,i));STEPS[S.step].on();render()}
+
+function renderCoach(){
+  if(S.skipped){coach.innerHTML=`<div class="tour"><div class="tmeta"><span class="count">Tour hidden</span><button class="tskip" id="resume">Show the tour</button></div></div>`;coach.querySelector('#resume').onclick=()=>{S.skipped=false;render()};return}
+  const st=STEPS[S.step];
+  coach.innerHTML=`<div class="tour">
+    <div class="tmeta"><span class="count">Step ${S.step+1} of ${STEPS.length} · ${esc(st.t)}</span>
+      <span class="tdots">${STEPS.map((_,i)=>`<button class="tdot ${i<S.step?'past':''} ${i===S.step?'on':''}" data-i="${i}" aria-label="Step ${i+1}"></button>`).join('')}</span>
+      <button class="tskip" id="skip">Hide tour</button></div>
+    <h3>${st.h}</h3><p>${st.p}</p>${st.ul?`<ul>${st.ul.map(x=>`<li>${x}</li>`).join('')}</ul>`:''}
+    <div class="cbtns"><button class="cbtn" id="prev" ${S.step===0?'disabled':''}>Back</button><button class="cbtn primary" id="next">${S.step===STEPS.length-1?'Start again':'Next'}</button></div></div>`;
+  coach.querySelector('#skip').onclick=()=>{S.skipped=true;render()};
+  coach.querySelector('#prev').onclick=()=>go(S.step-1);
+  coach.querySelector('#next').onclick=()=>go(S.step===STEPS.length-1?0:S.step+1);
+  coach.querySelectorAll('.tdot').forEach(b=>b.onclick=()=>go(+b.dataset.i));
+}
+
+/* chart */
+function chart(){
+  const W=420,H=170,L=26,R=8,T=10,B=28,max=8;
+  const x=i=>L+i*(W-L-R)/(DAYS.length-1), y=v=>T+(H-T-B)*(1-v/max);
+  const line=(arr,c)=>`<polyline fill="none" stroke="${c}" stroke-width="2" points="${arr.map((v,i)=>`${x(i)},${y(v)}`).join(' ')}"/>${arr.map((v,i)=>`<circle cx="${x(i)}" cy="${y(v)}" r="2.6" fill="${c}"/>`).join('')}`;
+  let g='';for(let v=0;v<=max;v+=2)g+=`<line x1="${L}" x2="${W-R}" y1="${y(v)}" y2="${y(v)}" stroke="#eef0f5"/><text x="${L-6}" y="${y(v)+3}" text-anchor="end">${v}</text>`;
+  const xl=DAYS.map((d,i)=>i%2?'':`<text x="${x(i)}" y="${H-8}" text-anchor="middle">${d}</text>`).join('');
+  return `<svg class="tsvg" viewBox="0 0 ${W} ${H}" role="img" aria-label="Conversations per day, 13 October to 12 November">${g}${xl}${S.series.esc?line(ESC,'var(--chart-2)'):''}${S.series.conv?line(CONV,'var(--chart-1)'):''}</svg>`;
+}
+
+function render(){
+  renderCoach();
+  const navItems=[['home','Home'],['ann','Announcements'],['mod','Modules'],['asg','Assignments'],['dis','Discussions'],['sup','Student Support and Community'],['glo','Glossary'],['luma','LUMA'],['ppl','People',1],['pag','Pages',1],['fil','Files',1],['set','Settings']];
+  const nav=navItems.map(([k,l,h])=>`<button data-nav="${k}" class="${S.nav===k?'on':''}">${l}${h?'<span class="hid" title="Hidden from students"></span>':''}</button>`).join('');
+  let stage='';
+  if(S.nav!=='luma'){
+    stage=`<p class="hint">This is the course home page. Click <b>LUMA</b> in the course menu to open the assistant.</p>`;
+  }else{
+    let body='';
+    if(S.view==='chat'){
+      body=`<div class="chat"><div class="welcome">Need help with your course? Ask me about course concepts, assignment deadlines, practice exercises, policies, or where to find resources and support.<br><br>Ask me anything to get started.</div><div class="ask">Ask about your course content…<b></b></div></div>`;
+    }else{
+      const tabs=`<div class="tabs"><button data-tab="insights" class="${S.tab==='insights'?'on':''}">Insights</button><button data-tab="trends" class="${S.tab==='trends'?'on':''}">Trends</button></div>`;
+      let pane='';
+      if(S.tab==='insights'){
+        pane=`<div class="sec"><h3>Insights</h3><p class="sub">Understand how your assistant is being used and discover the main themes of conversations your students, instructors or staff are having.</p></div>
+        <div class="ctrls" id="ctrls"><span class="sel">${ic('user',14)} All roles ${ic('chev',12)}</span><span class="sel">${ic('cal',14)} 2026-10-13 - 2026-11-12</span><span class="seg"><button class="${S.daily?'on':''}" data-seg="d">Daily</button><button class="${S.daily?'':'on'}" data-seg="m">Monthly</button></span></div>
+        <div class="mgrid" id="metrics">
+          <div class="metric"><h4><i>💬</i>Number of conversations</h4><div class="big">${TOT}</div></div>
+          <div class="metric"><h4><i>👥</i>Unique users</h4><div class="big">10</div></div>
+          <div class="metric"><h4><i>✦</i>Shortcut button clicks</h4><div class="big">0</div><button class="vb" id="vb">View breakdown</button></div>
+        </div>
+        <div class="minis"><div class="mini"><span>Number of AI answers</span><b>124</b></div><div class="mini"><span>Answers per conversation</span><b>4</b></div><div class="mini"><span>Conversations per user</span><b>3.1</b></div></div>
+        <div class="chartbox" id="chartbox"><div class="chartwrap">${chart()}<div class="legend">
+          <button data-s="conv" class="${S.series.conv?'':'off'}"><i style="background:var(--chart-1)"></i>Conversations</button>
+          <button data-s="esc" class="${S.series.esc?'':'off'}"><i style="background:var(--chart-2)"></i>Escalation</button>
+          ${['AI answers','User messages','Unique users','Resolution rate','Answer rating','Positive vote','Negative vote'].map(l=>`<button class="off" data-s="x"><i style="background:#c9ccd8"></i>${l}</button>`).join('')}</div></div>
+          <button class="linkbtn" id="tbl">${ic('table',13)} ${S.table?'Hide table':'View data as table'}</button>
+          ${S.table?`<div style="overflow-x:auto"><table class="tbl"><thead><tr><th>Date</th><th>Conversations</th><th>Escalation</th></tr></thead><tbody>${DAYS.map((d,i)=>`<tr><td>${d}</td><td>${CONV[i]}</td><td>${ESC[i]}</td></tr>`).join('')}</tbody></table></div>`:''}
+        </div>`;
+      }else{
+        pane=`<div class="trhead"><h3 style="margin:0;font-size:17px">Trends</h3><button class="b dark" id="newrep">${ic('plus',13)} New report</button></div>
+        <div class="show">Show Reports</div>
+        <div class="reports"><h4>Reports</h4><div class="dlab">Today</div>
+          ${S.hasReport?`<button class="rep ${S.repSel?'on':''}" id="rep"><b>${esc(REPORT.name)}</b><span>${REPORT.range} · generated ${REPORT.gen}</span><span class="ready">READY</span></button>`:`<div class="norep">No Reports</div>`}</div>
+        ${S.hasReport&&S.repSel?`<div class="themes" id="themes">${REPORT.themes.map(t=>`<div class="theme"><span class="n">${t.n} conv.</span><b>${esc(t.t)}</b><p>${esc(t.d)}</p></div>`).join('')}</div>`:`<div class="norep">Please select a report</div>`}
+        <div class="note">Trend reports describe topics, not people. Nobody is named and no messages are shown.</div>`;
+      }
+      body=`<div class="dash"><h2>Dashboard - ${esc(COURSE)} <span class="cid">Course ID: #1094</span></h2>${tabs}</div>${pane}`;
+    }
+    stage=`<div class="luma"><div class="lhead"><button class="ib" title="Chat history">${ic('hist')}</button><button class="ib ${S.view==='dash'?'on':''}" id="statsbtn" title="Course dashboard">${ic('chart')}</button><span class="t">LUMA</span><button class="ib" title="New chat">${ic('edit')}</button><button class="ib">${ic('dots')}</button></div><div class="lbody">${body}</div></div>`;
+  }
+  const modal=S.modal?`<div class="overlay"><div class="modal" id="modal"><div class="mhead"><h3>New report</h3><button class="ib" id="mclose">${ic('x')}</button></div><div class="mbody">
+    <label class="field">Name <span class="req">*</span><input id="rname" value="${esc(S.name)}" placeholder="e.g. PM101 – first four weeks"></label>
+    <label class="field">Start Date <span class="req">*</span><input value="October 13, 2026" readonly></label>
+    <label class="field">End Date <span class="req">*</span><input value="November 12, 2026" readonly></label>
+    <div class="nconv">Number of conversations: ${TOT}</div>
+    ${TOT>=30?`<p class="ok">Enough conversations to find themes.</p>`:`<p class="warn">The number must be at least 30.</p>`}
+  </div><div class="mfoot"><button class="b" id="mcancel">Cancel</button><button class="b dark" id="msubmit" ${S.name.trim()&&TOT>=30?'':'disabled'}>Submit</button></div></div></div>`:'';
+  app.innerHTML=`<aside class="gnav"><div class="lg">KING'S<br>COLLEGE</div><i></i><i></i><i></i><i></i><i></i><i></i></aside>
+    <nav class="cnav"><div class="crs">${CODE}</div>${nav}</nav>
+    <div class="main"><div class="crumb">${CODE} <span>›</span> ${S.nav==='luma'?'LUMA':'Home'}</div><div class="stage">${stage}</div>${modal}</div>`;
+
+  app.querySelectorAll('[data-nav]').forEach(b=>b.onclick=()=>{S.nav=b.dataset.nav;if(S.nav==='luma'&&S.step===1)go(2);else render()});
+  const sb=app.querySelector('#statsbtn');if(sb)sb.onclick=()=>{S.view=S.view==='dash'?'chat':'dash';if(S.view==='dash'&&S.step===2)go(3);else render()};
+  app.querySelectorAll('[data-tab]').forEach(b=>b.onclick=()=>{S.tab=b.dataset.tab;if(S.tab==='trends'&&S.step<6)go(6);else render()});
+  app.querySelectorAll('[data-seg]').forEach(b=>b.onclick=()=>{S.daily=b.dataset.seg==='d';render()});
+  app.querySelectorAll('[data-s]').forEach(b=>b.onclick=()=>{const k=b.dataset.s;if(k==='x'){toast('In LUMA this would add that line to the chart.');return}S.series[k]=!S.series[k];render()});
+  const tb=app.querySelector('#tbl');if(tb)tb.onclick=()=>{S.table=!S.table;render()};
+  const vb=app.querySelector('#vb');if(vb)vb.onclick=()=>toast('No shortcut buttons are switched on for this course yet.');
+  const nr=app.querySelector('#newrep');if(nr)nr.onclick=()=>{S.modal=true;if(S.step===6)go(7);else render()};
+  const rp=app.querySelector('#rep');if(rp)rp.onclick=()=>{S.repSel=!S.repSel;render()};
+  ['mclose','mcancel'].forEach(id=>{const e=app.querySelector('#'+id);if(e)e.onclick=()=>{S.modal=false;render()}});
+  const rn=app.querySelector('#rname');if(rn){rn.oninput=()=>{S.name=rn.value;const s=app.querySelector('#msubmit');if(s)s.disabled=!(S.name.trim()&&TOT>=30)}}
+  const ms=app.querySelector('#msubmit');if(ms)ms.onclick=()=>{S.modal=false;S.hasReport=true;S.repSel=true;toast('Report created. In LUMA this takes a minute or two.');if(S.step===7)go(8);else render()};
+
+  app.querySelectorAll('.spot').forEach(e=>e.classList.remove('spot'));
+  if(!S.skipped){const sel=STEPS[S.step].spot;if(sel){const el=app.querySelector(sel);if(el){el.classList.add('spot');el.scrollIntoView({block:'nearest',behavior:'smooth'})}}}
+}
+let tt;function toast(m){const t=document.getElementById('toast');t.textContent=m;t.hidden=false;clearTimeout(tt);tt=setTimeout(()=>t.hidden=true,2600)}
+go(0);
+})();
+</script>
+
+</body>
+</html>
